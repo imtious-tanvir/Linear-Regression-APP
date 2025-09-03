@@ -9,7 +9,7 @@ import streamlit as st
 
 #side bar
 st.title("Linear Regression Web Application")
-#st.subheader("Data Science")
+st.subheader("Data Science")
 
 #st.sidebar.header("Upload CSV or Use Sample")
 #use_example = st.sidebar.checkbox("Use example dataset")
