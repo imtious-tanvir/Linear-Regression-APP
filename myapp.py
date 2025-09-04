@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
 #side bar
 st.title("Linear Regression Web Application")
@@ -39,5 +40,38 @@ if len(numeric_cols) < 2 :
 target = st.selectbox("Select target feature", numeric_cols)
 features = st.multiselect("Select input feature columns", [col for col in numeric_cols if col != target], default = [col for col in numeric_cols if col != target])
 if len(features) == 0:
-  st.write("Please at least one feature to train")
+  st.write("Please select at least one feature to train")
   st.stop()
+
+df = df[features + [target]].dropna()
+X = df[features]
+y = df[target]
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size = 0.2, random_state = 42)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+st.suhheader("Model Evaluation")
+st.write(f"Mean Squared Error: {mse:.2f}")
+st.write(f"R^2 Scored: {r2:.2f}")
+
+
+
+
+
+
+
+
+
+
+
+
