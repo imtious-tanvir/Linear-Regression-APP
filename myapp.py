@@ -64,7 +64,16 @@ st.subheader("Model Evaluation")
 st.write(f"Mean Squared Error: {mse:.2f}")
 st.write(f"R^2 Scored: {r2:.2f}")
 
-
+input_data = {}
+valid_input = True
+for feature in features:
+  user_value = st.text_input(f"Enter {feature} (numeric value)")
+  try:
+    if user_value.strip() == "":
+      valid_input = False
+    else:
+      input_data[feature] = float(user_value)
+  except ValueError:
 
 
 
