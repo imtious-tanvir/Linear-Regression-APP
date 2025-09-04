@@ -38,3 +38,6 @@ if len(numeric_cols) < 2 :
   st.stop()
 target = st.selectbox("Select target feature", numeric_cols)
 features = st.multiselect("Select input feature columns", [col for col in numeric_cols if col != target], default = [col for col in numeric_cols if col != target])
+if len(features) == 0:
+  st.write("Please at least one feature to train")
+  st.stop()
