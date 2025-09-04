@@ -77,7 +77,14 @@ for feature in features:
         st.error(f"Invalid input for {feature}. Please enter a numeric value.")
         valid_input = False
     
-
+if st.button("Predict"):
+  if valid_input:
+    input_df = pd.DataFrame([input_data])
+    input_scaled = scaler.transform(input_df)
+    prediction = model.predict(input_scaled)
+    st.success(f"Predicted {target}: {prediction[0]:.2f}")
+  else:
+    st.error("Please enter valid numeric values for all features before predicting.")
 
 
 
